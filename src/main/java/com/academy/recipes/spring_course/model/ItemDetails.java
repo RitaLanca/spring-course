@@ -21,7 +21,6 @@ import lombok.Setter;
 public class ItemDetails {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Long id;
 	
 	protected String description;

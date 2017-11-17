@@ -1,7 +1,8 @@
 package com.academy.recipes.spring_course.model.enums;
 
 public enum UnitMeasures {
-	GRAMS,
+	GR,
 	POUNDS,
-	KILOGRAMS
+	KILOGRAMS,
+	LITER
 }

@@ -20,51 +20,51 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.academy.recipes.spring_course.model.User;
-import com.academy.recipes.spring_course.repository.UserRepository;
+import com.academy.recipes.spring_course.model.Author;
+import com.academy.recipes.spring_course.repository.AuthorRepository;
 
 
 
 @RestController
-@RequestMapping("/app/masterchief")
+@RequestMapping("/masterchief")
 @CrossOrigin
-public class UserController {
+public class SearchRecipeController {
 
 	
 	@Autowired
-	private UserRepository userRepository;
+	private AuthorRepository authorRepository;
 
 	@RequestMapping
-	public List<User> userList() {
-		return userRepository.findAll();
+	public List<Author> userList() {
+		return authorRepository.findAll();
 	}
 	
 	@RequestMapping(value="/user")
-	public User findCandidateByName(@RequestParam("name") String name) {
-		return userRepository.findByName(name);
+	public Author findCandidateByName(@RequestParam("name") String name) {
+		return authorRepository.findByName(name);
 	}
 
 	@PostMapping
-	public User registerUser(@RequestBody User user) {
-		return userRepository.saveAndFlush(user);
+	public Author registerUser(@RequestBody Author user) {
+		return authorRepository.saveAndFlush(user);
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public User findUserById(@PathVariable Long id) {
-		return userRepository.findOne(id);
+	public Author findUserById(@PathVariable Long id) {
+		return authorRepository.findOne(id);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public User updateUser(@PathVariable Long id, @RequestBody User user) {
-		User existingUser = userRepository.findOne(id);
+	public Author updateUser(@PathVariable Long id, @RequestBody Author user) {
+		Author existingUser = authorRepository.findOne(id);
 		BeanUtils.copyProperties(user, existingUser);
-		return userRepository.saveAndFlush(existingUser);
+		return authorRepository.saveAndFlush(existingUser);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public void deleteUser(@PathVariable Long id) {
-		User existingUser = userRepository.findOne(id);
-		userRepository.delete(existingUser);
+		Author existingUser = authorRepository.findOne(id);
+		authorRepository.delete(existingUser);
 	}
 	
 }

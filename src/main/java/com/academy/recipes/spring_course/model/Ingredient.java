@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.academy.recipes.spring_course.model.enums.UnitMeasures;
@@ -18,19 +19,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ItemDetails {
+public class Ingredient {
 
 	@Id
-	protected Long id;
+	protected int id;
 	
-	protected String description;
+	protected int ingredientAmout;
 	
 	@Enumerated(EnumType.STRING)
 	protected UnitMeasures unitMeasures;
 	
-	@OneToOne
+	@OneToMany
 	@JoinColumn(name="id")
 	@MapsId
-	protected Item item;
+	protected Recipe recipe;;
 	
 }

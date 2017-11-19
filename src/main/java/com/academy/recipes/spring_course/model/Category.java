@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,13 +15,17 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Item {
+public class Category {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Long id;
 	
-	@ManyToOne
+	protected String name;
+	
+	
+	
+	@ManyToMany
 	@JoinColumn(name="recipe_id")
 	protected Recipe recipe;
 

@@ -1,13 +1,12 @@
 package com.academy.recipes.spring_course.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +23,7 @@ public class Category {
 	protected String name;
 	
 	
-	
-	@ManyToMany
-	@JoinColumn(name="recipe_id")
+	@ManyToMany(mappedBy="recipe")
 	protected Recipe recipe;
 
 }

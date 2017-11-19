@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -23,7 +25,13 @@ public class Recipe {
 	protected int servings;
 	
 	@ManyToOne
-	@JoinColumn(name="author_id")
+	@JoinColumn(name="id")
 	protected Author author;
+	
+	@ManyToMany
+    @JoinTable(name="recipe_category", joinColumns=
+    {@JoinColumn(name="recipe_id")}, inverseJoinColumns=
+      {@JoinColumn(name="category_id")})
+	protected Category category;
 	
 }

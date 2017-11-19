@@ -31,7 +31,6 @@ public class Ingredient {
 	
 	@OneToMany
 	@JoinColumn(name="id")
-	@MapsId
 	protected Recipe recipe;;
 	
 }

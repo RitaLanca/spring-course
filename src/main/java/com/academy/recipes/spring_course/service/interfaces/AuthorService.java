@@ -18,7 +18,9 @@ public interface AuthorService  {
 	
 	Author findAuthorByName(String name);
 	
-	void deleteAuthor();
+	void deleteAuthor(Long id);
+	
+	List<Author> findAll();
 	
 	
 	

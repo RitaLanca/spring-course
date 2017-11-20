@@ -1,5 +1,7 @@
 package com.academy.recipes.spring_course.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,14 +38,17 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public Author findAuthorByName(String name) {
-		authorRepository.findByName(name);
-		return null;
+		return authorRepository.findByName(name);
+		 
+	}
+	
+	public List<Author> findAll() {
+		return authorRepository.findAll();
 	}
 
 	@Override
-	public void deleteAuthor() {
-		// TODO Auto-generated method stub
-		
+	public void deleteAuthor(Long id) {
+		authorRepository.delete(id);	
 	}
 
 }

@@ -37,8 +37,8 @@ public class AuthorServiceImpl implements AuthorService {
 	}
 
 	@Override
-	public Author findAuthorByName(String name) {
-		return authorRepository.findByName(name);
+	public List<Author> findAuthorByName(String name) {
+		return authorRepository.findAuthorByName(name);
 		 
 	}
 	
@@ -48,7 +48,8 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public void deleteAuthor(Long id) {
-		authorRepository.delete(id);	
+		authorRepository.delete(id);
+
 	}
 
 }

@@ -40,7 +40,7 @@ public class SearchRecipeController {
 	}
 	
 	@RequestMapping(value="/user")
-	public Author findCandidateByName(@RequestParam("name") String name) {
+	public List<Author> findCandidateByName(@RequestParam("name") String name) {
 		return authorRepository.findByName(name);
 	}
 

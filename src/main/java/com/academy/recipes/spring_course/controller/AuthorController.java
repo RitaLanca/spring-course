@@ -31,9 +31,9 @@ public class AuthorController {
 	public String registerAuthor (@RequestBody Author author) {
 		authorService.registerAuthor(author);
 			if(author==null) {
-				return "Author was created";
+				return "Author wasn't created";
 			} else
-			return "Author wasn't created";
+			return "Author was created";
 		 
 	}
 	
@@ -44,7 +44,7 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/search")
-	public Author findAuthorByName (@RequestParam("name") String name) {
+	public List<Author> findAuthorByName (@RequestParam("name") String name) {
 		return authorService.findAuthorByName(name);	
 	
 	}

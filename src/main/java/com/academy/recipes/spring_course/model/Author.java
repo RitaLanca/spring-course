@@ -22,14 +22,17 @@ public class Author {
 	
 	protected String name;
 	
+	protected String surname;
+	
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name +"]";
+		return "Author [id=" + id + ", name=" + name +"surname " + surname +"]";
 	}
 
-	public Author(Long id, String name, Long age) {
+	public Author(Long id, String name, String surname) {
 		this.id = id;
 		this.name = name;
+		this.surname= surname;
 	}
 	
 

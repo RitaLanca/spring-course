@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS `recipes_db`.`author` ;
 CREATE TABLE IF NOT EXISTS `recipes_db`.`author` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(70) NOT NULL,
+  `surname` VARCHAR(70) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

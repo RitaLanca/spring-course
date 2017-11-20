@@ -1,21 +1,19 @@
 package com.academy.recipes.spring_course.model;
 
-
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
 @Entity  // This tells Hibernate to make a table out of this class
-
+@NoArgsConstructor
 public class Author {
 	
 	@Id
@@ -29,10 +27,7 @@ public class Author {
 		return "Author [id=" + id + ", name=" + name +"]";
 	}
 
-
-
 	public Author(Long id, String name, Long age) {
-		super();
 		this.id = id;
 		this.name = name;
 	}

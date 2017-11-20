@@ -15,8 +15,7 @@ import com.academy.recipes.spring_course.model.Author;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-	List<Author> findByName(String name);
-	
+
 	@Query("Select au From Author au where au.name Like %:name% " +
 	"or au.surname Like %:name%  ")
 	List<Author> findAuthorByName(@Param("name") String name);

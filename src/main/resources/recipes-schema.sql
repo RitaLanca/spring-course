@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `recipes_db`.`recipe` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20) NOT NULL,
   `servings` INT,
+  `description` LONGTEXT,
   `author_id` BIGINT(20) NOT NULL,
   PRIMARY KEY (`id`),
   foreign key(author_id) references author(id))

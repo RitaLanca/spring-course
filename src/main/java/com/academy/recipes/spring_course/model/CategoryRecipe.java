@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class CategoryRecipe {
 
 	@Id
@@ -26,4 +29,16 @@ public class CategoryRecipe {
 	@ManyToOne
 	@JoinColumn(name="recipe_id")
 	protected Recipe recipe;
+
+	public CategoryRecipe(Category category, Recipe recipe) {
+		this.category = category;
+		this.recipe = recipe;
+	}
+
+	@Override
+	public String toString() {
+		return "CategoryRecipe [id=" + id + ", category=" + category + ", recipe=" + recipe + "]";
+	}
+	
+	
 }

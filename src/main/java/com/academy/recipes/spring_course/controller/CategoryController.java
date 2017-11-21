@@ -32,10 +32,7 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/labels")
-	public String removeCategoryToRecipe (@RequestParam("id") Long recipeId,@RequestBody Category category) {
-		System.out.println("<----------------------------------------------------------------------------");
-		System.out.println("<----------------------------------------------------------------------------");
-		System.out.println("<----------------------------------------------------------------------------");
+	public Boolean removeCategoryToRecipe (@RequestParam("id") Long recipeId,@RequestBody Category category) {
 		return categoryService.removeCategoryFromRecipe(recipeId, category);
 	}
 

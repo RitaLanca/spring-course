@@ -50,37 +50,21 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 	@Override
-	public String removeCategoryFromRecipe(Long recipeId, Category category) {
-		
+	public Boolean removeCategoryFromRecipe(Long recipeId, Category category) {
 		
 		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
 		Category categorySelected= categoryRepository.findCategoryByName(category.getName());
 		
 		if(recipeSelected==null || categorySelected==null) {
-			//return false;
-			System.out.println("<-----------------------------------------------------------------------" + categorySelected + " ------------------------------------------>");
-			System.out.println("<-----------------------------------------------------------------------" + recipeSelected + " ------------------------------------------>");
-			return "false";
+			return false;
 		}
 		
+		CategoryRecipe categoryRecipeToRemove = categoryRecipeRepository.findCategoryRecipeByRecipeIdAndCategoryId(recipeId,categorySelected.getId());		
 		
-		
-		
-		CategoryRecipe categoryRecipeToRemove = null;
-		categoryRecipeToRemove = categoryRecipeRepository.findCategoryRecipeByRecipeIdAndCategoryId(recipeId,categorySelected.getId());		
-		
-		if(categoryRecipeToRemove==null) {
-			return "false";
-		}
-			
-		
-//		Category lookForIdOfCategorySelected= categorySelected.getId();
-		
-		
+
 		categoryRecipeRepository.delete(categoryRecipeToRemove);		
-		System.out.println("<-----------------------------------------------------------------------" + categoryRecipeToRemove + " ------------------------------------------>");
-//		return true;
-		return "was revoved"+categoryRecipeToRemove;
+		
+		return true;
 		
 	}
 

@@ -9,6 +9,6 @@ public interface CategoryService {
 	
 	Boolean addCategoryToRecipe(Long recipeId, Category category);
 
-	String removeCategoryFromRecipe(Long recipeId, Category category);
+	Boolean removeCategoryFromRecipe(Long recipeId, Category category);
 	
 }

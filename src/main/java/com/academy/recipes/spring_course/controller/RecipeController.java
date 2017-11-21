@@ -6,16 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.academy.recipes.spring_course.model.Recipe;
-import com.academy.recipes.spring_course.service.interfaces.AuthorService;
 import com.academy.recipes.spring_course.service.interfaces.RecipeService;
 
 
@@ -38,28 +38,24 @@ public class RecipeController {
 		return recipeService.findRecipeByRecipeName(name);
 	}
 	
-	@RequestMapping(value="/searchByAuthorName")
-	public List<Recipe> findRecipeByAuthorName(@RequestParam("author") String authorName) {
-		return recipeService.findRecipeByAuthor(authorName);
+	@RequestMapping(value="/searchByAuthorId")
+	public List<Recipe> findRecipeByAuthorId(@RequestParam("authorId") Long authorId) {
+		return recipeService.findRecipeByAuthorId(authorId);
 	}
-//
-//	
-//	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-//	public Author findUserById(@PathVariable Long id) {
-//		return recipeRepository.findOne(id);
-//	}
-//	
-//	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-//	public Author updateUser(@PathVariable Long id, @RequestBody Author user) {
-//		Author existingUser = authorRepository.findOne(id);
-//		BeanUtils.copyProperties(user, existingUser);
-//		return authorRepository.saveAndFlush(existingUser);
-//	}
-//	
-//	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-//	public void deleteUser(@PathVariable Long id) {
-//		Author existingUser = authorRepository.findOne(id);
-//		authorRepository.delete(existingUser);
-//	}
+	
+
+	@DeleteMapping("/{recipeId}")
+	public String deleteRecipe(@PathVariable ("recipeId") Long id) {
+		return recipeService.deleteRecipe(id);
+		
+	}
+	
+	
+	@PutMapping("/update")
+	public Recipe editRecipe(@RequestParam ("id") Long id, @RequestBody Recipe recipe) {
+		return recipeService.updateRecipe(id, recipe);
+	}
+	
+
 	
 }

@@ -5,9 +5,6 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.academy.recipes.spring_course.model.Author;
 import com.academy.recipes.spring_course.repository.AuthorRepository;
@@ -31,7 +28,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public Author updateAuthor( Long id, Author author) {
 		Author existingAuthor = authorRepository.findOne(id);
-		BeanUtils.copyProperties(author, existingAuthor);
+		BeanUtils.copyProperties(existingAuthor,author);
 		return authorRepository.saveAndFlush(existingAuthor);
 		
 	}

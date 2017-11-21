@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 import com.academy.recipes.spring_course.model.Author;
 import com.academy.recipes.spring_course.model.Recipe;
-import com.academy.recipes.spring_course.repository.AuthorRepository;
 import com.academy.recipes.spring_course.repository.RecipeRepository;
 import com.academy.recipes.spring_course.service.interfaces.AuthorService;
 import com.academy.recipes.spring_course.service.interfaces.RecipeService;
+
 
 @Component
 public class RecipeServiceImpl implements RecipeService{
@@ -29,10 +29,11 @@ public class RecipeServiceImpl implements RecipeService{
 		
 		System.out.println(recipe);
 		
-		if (recipe!=null)
+		if (recipe!=null) {
 			return "A new recipe was created";
-		else
-			return "It wasn't possible to create a new recipe";
+		} 
+		return "It wasn't possible to create a new recipe";
+		
 	}
 
 	@Override
@@ -42,20 +43,58 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public List<Recipe> findRecipeByAuthor(String authorName) {
+	public List<Recipe> findRecipeByAuthorId(Long authorId) {
 		
-		Author author = authorService.findAuthorByName(authorName).get(0);
+		Author author = authorService.findAuthorById(authorId);
 				
 		return recipeRepository.findByAuthor(author) ;
 		
 	}
-	
+
 	@Override
-	public List<Recipe> findRecipeByAuthorId(Long authorId) {
-		
-		Author author = authorService.findAuthorById(authorId);
-		return recipeRepository.findByAuthor(author) ;
+	public String deleteRecipe(Long recipeId) {
+		String result="";
+		try {
+			
+			if(recipeRepository.exists(recipeId)) {
+				recipeRepository.delete(recipeId);	
+				result="Recipe was successfully deleted";
+			} else
+				result="Recipe doesn´t exist";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 		
 	}
+
+	@Override
+	public Recipe findRecipeById(Long recipeId) {
+		return recipeRepository.getOne(recipeId);
+		 
+	}
+
+	@Override
+	public Recipe updateRecipe(Long recipeId, Recipe recipe) {
+		Recipe recipeToUpdate=recipeRepository.findOne(recipeId);
+		
+		if(recipe.getName()!=null)
+			recipeToUpdate.setName(recipe.getName());
+		
+		if(recipe.getDescription()!=null)
+		recipeToUpdate.setDescription(recipe.getDescription());
+		
+		Integer servingsToUpdate=recipe.getServings();
+		if(servingsToUpdate!=null)
+			recipeToUpdate.setServings(servingsToUpdate);
+		
+		return recipeRepository.save(recipeToUpdate);
+		
+/*This code is an alternative code for update recipe method	
+*		Recipe existingRecipe = recipeRepository.findOne(recipeId);
+*		BeanUtils.copyProperties(existingRecipe,recipe);
+*		return recipeRepository.saveAndFlush(existingRecipe);
+*/		
 	
+	}
 }

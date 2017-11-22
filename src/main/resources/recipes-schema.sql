@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `recipes_db`.`category_recipe` (
     ON DELETE CASCADE,
   FOREIGN KEY (`recipe_id`)
     REFERENCES `recipes_db`.`recipe` (`id`))
-     ON DELETE CASCADE,
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -65,7 +64,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `recipes_db`.`ingredient` ;
 
 CREATE TABLE IF NOT EXISTS `recipes_db`.`ingredient` (
-  `id` BIGINT(20) NOT NULL,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -78,11 +77,12 @@ CREATE TABLE IF NOT EXISTS `recipes_db`.`ingredient_recipe` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `ingredient_id` BIGINT(20) NOT NULL,
   `recipe_id` BIGINT(20) NOT NULL,
-  `quantity` INT NOT NULL,
-  `unit_measure` VARCHAR(45) NOT NULL,
+  `quantity` INT,
+  `unit_measure` VARCHAR(45),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`ingredient_id`)
-    REFERENCES `recipes_db`.`ingredient` (`id`),
+    REFERENCES `recipes_db`.`ingredient` (`id`)
+    ON DELETE CASCADE,
   FOREIGN KEY (`recipe_id`)
     REFERENCES `recipes_db`.`recipe` (`id`))
 ENGINE = InnoDB

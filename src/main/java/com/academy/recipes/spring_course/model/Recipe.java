@@ -42,6 +42,9 @@ public class Recipe {
 	
 	@OneToMany(mappedBy="recipe", fetch=FetchType.LAZY)
 	protected List<CategoryRecipe> recipesInCategory;
+	
+	@OneToMany(mappedBy="recipe", fetch=FetchType.LAZY)
+	protected List<IngredientRecipe> ingredientsInRecipe;
 
 	public Recipe(String name, int servings) {
 		this.name = name;

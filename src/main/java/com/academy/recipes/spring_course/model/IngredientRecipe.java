@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 import com.academy.recipes.spring_course.model.enums.UnitMeasures;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class IngredientRecipe {
 
 	@Id
@@ -35,5 +37,25 @@ public class IngredientRecipe {
 	
 	@Enumerated(EnumType.STRING)
 	protected UnitMeasures unitMeasure;
+	
+	public IngredientRecipe(Ingredient ingredient, Recipe recipe) {
+		this.ingredient = ingredient;
+		this.recipe = recipe;
+	}
+		
+	public IngredientRecipe(Ingredient ingredient, Recipe recipe, int quantity, UnitMeasures unitMeasure) {
+		this.ingredient = ingredient;
+		this.recipe = recipe;
+		this.quantity = quantity;
+		this.unitMeasure = unitMeasure;
+	}
+
+
+
+	
+
+
+	
+	
 	
 }

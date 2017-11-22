@@ -52,9 +52,11 @@ CREATE TABLE IF NOT EXISTS `recipes_db`.`category_recipe` (
   `recipe_id` BIGINT(20) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`category_id`)
-    REFERENCES `recipes_db`.`category` (`id`),
+    REFERENCES `recipes_db`.`category` (`id`)
+    ON DELETE CASCADE,
   FOREIGN KEY (`recipe_id`)
     REFERENCES `recipes_db`.`recipe` (`id`))
+     ON DELETE CASCADE,
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

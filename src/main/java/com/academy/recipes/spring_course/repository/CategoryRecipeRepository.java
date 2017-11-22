@@ -14,4 +14,6 @@ public interface CategoryRecipeRepository extends JpaRepository<CategoryRecipe, 
 	@Query("Select cr From CategoryRecipe cr where cr.recipe.id=:recipeId and cr.category.id=:categoryId ")
 	CategoryRecipe findCategoryRecipeByRecipeIdAndCategoryId(@Param("recipeId") Long recipeId, @Param("categoryId") Long categoryId);
 			
+	@Query ("Delete From CategoryRecipe cr where cr.category.id=:categoryId")
+	Boolean removeCategoryInRecipes (@Param("categoryId") Long categoryId);
 }

@@ -2,6 +2,7 @@ package com.academy.recipes.spring_course.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,12 +24,13 @@ public class Category {
 	
 	protected String name;
 	
-	@OneToMany(mappedBy="category", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="category", fetch=FetchType.LAZY, cascade= CascadeType.REMOVE)
 	protected List<CategoryRecipe> recipesInCategory;
-	
+
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", recipesInCategory=" + recipesInCategory + "]";
+		return "Category [id=" + id + ", name=" + name + "]";
 	}
-
+	
+	
 }

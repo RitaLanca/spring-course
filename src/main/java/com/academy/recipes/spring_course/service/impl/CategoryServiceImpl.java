@@ -25,8 +25,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	RecipeService recipeService;
 	
+	@Autowired
+	CategoryService categoryService;
+	
 	@Override
-	public Category createCategoryLabel(Category category) {
+	public Category createCategoryLable(Category category) {
 		return categoryRepository.saveAndFlush(category);
 	}
 
@@ -39,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
 		if(recipeSelected==null || categoryToAdd==null) {
 			return false;
 		}
+		
 		
 		CategoryRecipe categoryInRecipe= new CategoryRecipe(categoryToAdd, recipeSelected);
 		
@@ -61,13 +65,34 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		CategoryRecipe categoryRecipeToRemove = categoryRecipeRepository.findCategoryRecipeByRecipeIdAndCategoryId(recipeId,categorySelected.getId());		
 		
-
 		categoryRecipeRepository.delete(categoryRecipeToRemove);		
 		
 		return true;
 		
 	}
 
+
+	@Override
+	public String eliminateCategoryLable(Long categoryId) {
+		
+		Category categoryToDelete = categoryRepository.findCategoryById(categoryId);
+	
+		if (categoryToDelete==null) {
+			return "The category doesn´t exist";
+		}
+		
+		categoryRepository.delete(categoryToDelete);
+			
+		return "The category was deleted";
+	
+}
+
+
+	@Override
+	public Category findCategoryById(Long categoryId) {
+		
+		return categoryRepository.findCategoryById(categoryId);
+	}
 
 
 

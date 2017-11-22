@@ -23,7 +23,7 @@ public class CategoryController {
 	
 	@PostMapping("")
 	public Category createCategoryLable (@RequestBody Category category) {
-		return categoryService.createCategoryLabel(category);
+		return categoryService.createCategoryLable(category);
 	}
 	
 	@PostMapping("/labels")
@@ -35,8 +35,11 @@ public class CategoryController {
 	public Boolean removeCategoryToRecipe (@RequestParam("id") Long recipeId,@RequestBody Category category) {
 		return categoryService.removeCategoryFromRecipe(recipeId, category);
 	}
-
-
+	
+	@DeleteMapping("")
+	public String removeCategoryLable (@RequestParam("id") Long categoryId) {
+		return categoryService.eliminateCategoryLable(categoryId);
+	}
 
 
 }

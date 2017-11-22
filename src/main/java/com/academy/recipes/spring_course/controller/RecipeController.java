@@ -29,7 +29,7 @@ public class RecipeController {
 	private RecipeService recipeService;
 	
 	@PostMapping("/add")
-	public String createRecipe(@RequestBody Recipe recipe, @RequestParam Long authorId) {
+	public String createRecipe(@RequestBody Recipe recipe, @RequestParam ("authorId") Long authorId) {
 		return recipeService.createRecipe(recipe, authorId);
 	}
 

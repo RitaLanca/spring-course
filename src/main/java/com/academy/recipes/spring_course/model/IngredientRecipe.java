@@ -50,12 +50,17 @@ public class IngredientRecipe {
 		this.unitMeasure = unitMeasure;
 	}
 
+	public IngredientRecipe(int quantity, UnitMeasures unitMeasure) {
+		super();
+		this.quantity = quantity;
+		this.unitMeasure = unitMeasure;
+	}
 
+	@Override
+	public String toString() {
+		return "IngredientRecipe [ingredient=" + ingredient + ", recipe=" + recipe + ", quantity=" + quantity
+				+ ", unitMeasure=" + unitMeasure + "]";
+	}
 
-	
-
-
-	
-	
 	
 }

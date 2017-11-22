@@ -55,4 +55,68 @@ public class IngredientServiceImpl implements IngredientService {
 		
 	}
 
+	@Override
+	public Boolean removeIngredientFromRecipe(Long recipeId, Ingredient ingredient) {
+		
+		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
+		Ingredient ingredientSelected= ingredientRepository.findIngredientByName(ingredient.getName());
+		
+		if(recipeSelected==null || ingredientSelected==null) {
+			return false;
+		}
+		
+		IngredientRecipe ingredientRecipeToRemove = ingredientRecipeRepository.findIngredientRecipeByRecipeIdAndIngredientId(recipeId,ingredientSelected.getId());		
+		
+		ingredientRecipeRepository.delete(ingredientRecipeToRemove);		
+		
+		return true;
+	}
+
+	@Override
+	public String eliminateCategoryLable(Long ingredientId) {
+		
+		Ingredient ingredientToDelete = ingredientRepository.findIngredientById(ingredientId);
+		
+		if (ingredientToDelete==null) {
+			return "The ingredient doesn´t exist";
+		}
+		
+		ingredientRepository.delete(ingredientToDelete);
+			
+		return "The ingredient was deleted";
+	
+	}
+
+	@Override
+	public IngredientRecipe setIngredient(Long recipeId, Ingredient ingredient, IngredientRecipe settings) {
+//		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
+//		
+//		System.out.println("<------------------------------------------------"+recipeId + "---------------------------------------------->");
+//		System.out.println("<------------------------------------------------"+ingredient + "---------------------------------------------->");
+//		
+//		//Validate if recipe and ingredient exist
+//		if(recipeId==null || ingredient==null )
+//			return null;
+//		
+//		//Turn front-end ingredient into a Ingredient Object
+//		Ingredient ingredientSelected= ingredientRepository.findIngredientByName(ingredient.getName());
+//		System.out.println("<------------------------------------------------"+ingredientSelected + "---------------------------------------------->");
+//		
+//		IngredientRecipe ingredientExistsInRecipe= ingredientRecipeRepository.findIngredientRecipeByRecipeIdAndIngredientId(recipeId, ingredientSelected.getId());
+//		System.out.println("<------------------------------------------------"+ingredientExistsInRecipe + "---------------------------------------------->");
+//		
+//		//Validate if ingredient exists in the recipe
+//		if(ingredientExistsInRecipe==null) {
+//			System.out.println("<--------------------------------------5555555555555664546----------"+ingredientExistsInRecipe + "---------------------------------------------->");
+//		
+//			return null;
+//		}
+//	
+//		 //UpDate the Ingredient in Recipe
+//		 IngredientRecipe ingredientSet = new IngredientRecipe(ingredientSelected, recipeSelected, settings.getQuantity(), settings.getUnitMeasure());
+//		 		 
+//		 return ingredientSet;
+//	
+		return null;
+	}
 }

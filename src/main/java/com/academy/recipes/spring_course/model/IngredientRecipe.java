@@ -61,6 +61,8 @@ public class IngredientRecipe {
 		return "IngredientRecipe [ingredient=" + ingredient + ", recipe=" + recipe + ", quantity=" + quantity
 				+ ", unitMeasure=" + unitMeasure + "]";
 	}
+	
+	
 
 	
 }

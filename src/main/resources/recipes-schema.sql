@@ -77,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `recipes_db`.`ingredient_recipe` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `ingredient_id` BIGINT(20) NOT NULL,
   `recipe_id` BIGINT(20) NOT NULL,
-  `quantity` INT,
-  `unit_measure` VARCHAR(45),
+  `quantity` INT NULL DEFAULT 0,
+  `unit_measure` VARCHAR(45) NULL DEFAULT 'GR',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`ingredient_id`)
     REFERENCES `recipes_db`.`ingredient` (`id`)

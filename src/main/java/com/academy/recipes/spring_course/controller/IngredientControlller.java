@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.academy.recipes.spring_course.business.dtos.IngredientRecipeDto;
 import com.academy.recipes.spring_course.model.Ingredient;
 import com.academy.recipes.spring_course.model.IngredientRecipe;
 import com.academy.recipes.spring_course.service.interfaces.IngredientService;
@@ -41,9 +42,10 @@ public class IngredientControlller {
 		return ingredientService.eliminateCategoryLable(ingredientId);
 	}
 	
+	
 	@PostMapping("/set")
-	public IngredientRecipe setIngredient (@RequestParam("recipeId") Long recipeId,@RequestBody Ingredient ingredientInRecipe, @RequestBody IngredientRecipe settings) {
-		return ingredientService.setIngredient(recipeId, ingredientInRecipe, settings );
+	public IngredientRecipeDto setIngredient (@RequestParam("recipeId") Long recipeId,@RequestParam("ingredientId") Long ingredientId, @RequestBody IngredientRecipe settings) {
+		return ingredientService.setIngredient(recipeId, ingredientId, settings );
 	}
 	
 }

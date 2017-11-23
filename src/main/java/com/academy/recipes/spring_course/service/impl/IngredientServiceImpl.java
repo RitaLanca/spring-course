@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.academy.recipes.spring_course.business.dtos.IngredientRecipeDto;
 import com.academy.recipes.spring_course.model.Ingredient;
 import com.academy.recipes.spring_course.model.IngredientRecipe;
 import com.academy.recipes.spring_course.model.Recipe;
@@ -26,6 +27,7 @@ public class IngredientServiceImpl implements IngredientService {
 	
 	@Autowired RecipeService recipeService;
 	
+	
 	@Override
 	public Ingredient createNewIngredient(Ingredient ingredient) {
 		return ingredientRepository.saveAndFlush(ingredient);
@@ -41,11 +43,11 @@ public class IngredientServiceImpl implements IngredientService {
 			return false;
 		}
 		
-		//Checking if ingredient already exists
 		
+		//Checking if ingredient already exists
 		if(ingredientToAdd==null) {
 			ingredientToAdd= createNewIngredient(ingredient);
-			return true;						
+			
 		}
 		
 		IngredientRecipe ingredientRecipe= new IngredientRecipe(ingredientToAdd, recipeSelected);
@@ -88,35 +90,37 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	@Override
-	public IngredientRecipe setIngredient(Long recipeId, Ingredient ingredient, IngredientRecipe settings) {
-//		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
-//		
-//		System.out.println("<------------------------------------------------"+recipeId + "---------------------------------------------->");
-//		System.out.println("<------------------------------------------------"+ingredient + "---------------------------------------------->");
-//		
-//		//Validate if recipe and ingredient exist
-//		if(recipeId==null || ingredient==null )
-//			return null;
-//		
-//		//Turn front-end ingredient into a Ingredient Object
-//		Ingredient ingredientSelected= ingredientRepository.findIngredientByName(ingredient.getName());
-//		System.out.println("<------------------------------------------------"+ingredientSelected + "---------------------------------------------->");
-//		
-//		IngredientRecipe ingredientExistsInRecipe= ingredientRecipeRepository.findIngredientRecipeByRecipeIdAndIngredientId(recipeId, ingredientSelected.getId());
-//		System.out.println("<------------------------------------------------"+ingredientExistsInRecipe + "---------------------------------------------->");
-//		
-//		//Validate if ingredient exists in the recipe
-//		if(ingredientExistsInRecipe==null) {
-//			System.out.println("<--------------------------------------5555555555555664546----------"+ingredientExistsInRecipe + "---------------------------------------------->");
-//		
-//			return null;
-//		}
-//	
-//		 //UpDate the Ingredient in Recipe
-//		 IngredientRecipe ingredientSet = new IngredientRecipe(ingredientSelected, recipeSelected, settings.getQuantity(), settings.getUnitMeasure());
-//		 		 
-//		 return ingredientSet;
-//	
-		return null;
+	public IngredientRecipeDto setIngredient(Long recipeId, Long ingredientId, IngredientRecipe settings) {
+		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
+		Ingredient ingredientSelected= ingredientRepository.findIngredientById(ingredientId);
+		
+		//Validate if recipe and ingredient exist
+		if(recipeSelected==null || ingredientSelected==null )
+			return null;
+		
+		
+		IngredientRecipe ingredientExistsInRecipe= ingredientRecipeRepository.findIngredientRecipeByRecipeIdAndIngredientId(recipeId, ingredientId);
+				
+		//Validate if ingredient exists in the recipe
+		if(ingredientExistsInRecipe==null) {
+			return null;
+		}
+	
+		
+		 //UpDate the Ingredient in Recipe
+		//Quantity is 0 by default in database
+		ingredientExistsInRecipe.setQuantity(settings.getQuantity());
+		
+		if(settings.getUnitMeasure()!= null) {
+			ingredientExistsInRecipe.setUnitMeasure(settings.getUnitMeasure());
+		}
+		
+		
+		ingredientRecipeRepository.saveAndFlush(ingredientExistsInRecipe);
+	 		 
+		 return new IngredientRecipeDto(recipeSelected.getName(),ingredientSelected.getName(), settings.getQuantity(), settings.getUnitMeasure());
+	
 	}
+
+	
 }

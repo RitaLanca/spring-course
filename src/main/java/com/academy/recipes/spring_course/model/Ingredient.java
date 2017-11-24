@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,7 @@ public class Ingredient {
 	
 	protected String name;
 	
-
+	@JsonBackReference
 	@OneToMany(mappedBy="ingredient", fetch=FetchType.LAZY, cascade= CascadeType.REMOVE)
 	protected List<IngredientRecipe> ingredientsInRecipe;
 

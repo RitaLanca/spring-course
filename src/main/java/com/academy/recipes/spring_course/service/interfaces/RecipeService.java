@@ -2,9 +2,11 @@ package com.academy.recipes.spring_course.service.interfaces;
 
 import java.util.List;
 
+import com.academy.recipes.spring_course.business.dtos.RecipeDto;
 import com.academy.recipes.spring_course.model.Recipe;
 
 public interface RecipeService {
+	List<RecipeDto> findAllRecipes ();
 	
 	String createRecipe (Recipe recipe, Long authorId);
 	

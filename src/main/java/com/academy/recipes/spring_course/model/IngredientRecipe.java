@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.academy.recipes.spring_course.model.enums.UnitMeasures;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +25,15 @@ public class IngredientRecipe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name="ingredient_id") //nome da coluna que corresponde ao linked table
+	@JsonManagedReference
 	protected Ingredient ingredient;
-	
+
 	@ManyToOne
 	@JoinColumn(name="recipe_id")
+	@JsonManagedReference
 	protected Recipe recipe;
 	
 	protected int quantity;

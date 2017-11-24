@@ -118,7 +118,7 @@ public class IngredientServiceImpl implements IngredientService {
 		
 		ingredientRecipeRepository.saveAndFlush(ingredientExistsInRecipe);
 	 		 
-		 return new IngredientRecipeDto(recipeSelected.getName(),ingredientSelected.getName(), settings.getQuantity(), settings.getUnitMeasure());
+		 return new IngredientRecipeDto(recipeSelected.getName(),ingredientSelected.getName(),recipeSelected.getDescription(), settings.getQuantity(), settings.getUnitMeasure());
 	
 	}
 

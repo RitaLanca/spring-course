@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,10 +25,12 @@ public class CategoryRecipe {
 	
 	@ManyToOne
 	@JoinColumn(name="category_id")
+	@JsonManagedReference
 	protected Category category;
 	
 	@ManyToOne
 	@JoinColumn(name="recipe_id")
+	@JsonManagedReference
 	protected Recipe recipe;
 
 	public CategoryRecipe(Category category, Recipe recipe) {

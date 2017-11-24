@@ -1,10 +1,12 @@
 package com.academy.recipes.spring_course.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.academy.recipes.spring_course.business.dtos.RecipeDto;
 import com.academy.recipes.spring_course.model.Author;
 import com.academy.recipes.spring_course.model.Recipe;
 import com.academy.recipes.spring_course.repository.RecipeRepository;
@@ -17,6 +19,7 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Autowired
 	private RecipeRepository recipeRepository;
+
 
 	@Autowired
 	private AuthorService authorService;
@@ -96,5 +99,18 @@ public class RecipeServiceImpl implements RecipeService{
 *		return recipeRepository.saveAndFlush(existingRecipe);
 */		
 	
+	}
+
+	@Override
+	public List<RecipeDto> findAllRecipes() {
+		List<Recipe> recipes= recipeRepository.findAll();
+		List<RecipeDto> recipeDtoList= new ArrayList<RecipeDto>();
+		
+		
+		for(Recipe recipe: recipes) {
+			recipeDtoList.add(new RecipeDto(recipe.getId(), recipe.getName(), recipe.getDescription(), recipe.getServings(),recipe.getAuthor(), recipe.getRecipesInCategory(), recipe.getIngredientsInRecipe()));
+		}
+		
+		return recipeDtoList;
 	}
 }

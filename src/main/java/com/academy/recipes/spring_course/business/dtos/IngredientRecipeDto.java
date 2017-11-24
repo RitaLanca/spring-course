@@ -15,6 +15,7 @@ public class IngredientRecipeDto {
 
 	String recipeName;
 	String ingredientName;
+	String description;
 	int quantity;
 	UnitMeasures unitMeasure;
 }

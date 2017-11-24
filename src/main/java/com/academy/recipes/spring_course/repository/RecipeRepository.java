@@ -27,4 +27,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 //	@Query("Delete r From Recipe r where r.id=:recipeId ")
 //	Recipe deleteRecipe(@Param("recipeId") Long recipeId);
 	
+//	@Query("Select r From Recipe r")
+//	List<Recipe> findAll();
+	
 	}

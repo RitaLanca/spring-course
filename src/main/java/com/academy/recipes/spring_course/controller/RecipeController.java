@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.academy.recipes.spring_course.business.dtos.RecipeDto;
 import com.academy.recipes.spring_course.model.Recipe;
 import com.academy.recipes.spring_course.service.interfaces.RecipeService;
 
@@ -27,6 +28,12 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
+	
+	@RequestMapping(value = "/")
+	public List<RecipeDto> findAllRecipes() {
+		return recipeService.findAllRecipes();
+	}
+
 	
 	@PostMapping("/add")
 	public String createRecipe(@RequestBody Recipe recipe, @RequestParam ("authorId") Long authorId) {

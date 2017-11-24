@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,10 +42,11 @@ public class Recipe {
 	@JoinColumn(name="author_id")
 	protected Author author;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="recipe", fetch=FetchType.LAZY)
 	protected List<CategoryRecipe> recipesInCategory;
 	
-
+	@JsonBackReference
 	@OneToMany(mappedBy="recipe", fetch=FetchType.LAZY)
 	protected List<IngredientRecipe> ingredientsInRecipe;
 

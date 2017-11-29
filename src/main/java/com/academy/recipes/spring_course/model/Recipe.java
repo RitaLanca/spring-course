@@ -13,11 +13,13 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonIgnoreProperties(value={"hibernateLazyInitializer", "handler"},ignoreUnknown = true)
 @Entity
 @Getter
 @Setter
@@ -42,16 +44,22 @@ public class Recipe {
 	@JoinColumn(name="author_id")
 	protected Author author;
 	
-	@JsonBackReference
+	@JsonBackReference(value="categoryRecipe")
 	@OneToMany(mappedBy="recipe", fetch=FetchType.LAZY)
 	protected List<CategoryRecipe> recipesInCategory;
 	
-	@JsonBackReference
+	@JsonBackReference(value="ingredientRecipe")
 	@OneToMany(mappedBy="recipe", fetch=FetchType.LAZY)
 	protected List<IngredientRecipe> ingredientsInRecipe;
 
 	public Recipe(String name, int servings) {
 		this.name = name;
+		this.servings = servings;
+	}
+	
+	public Recipe(String name, String description, int servings) {
+		this.name = name;
+		this.description= description;
 		this.servings = servings;
 	}
 

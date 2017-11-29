@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ingredient {
 
 	@Id
@@ -26,7 +28,7 @@ public class Ingredient {
 	
 	protected String name;
 	
-	@JsonBackReference
+	@JsonBackReference(value="ingredient")
 	@OneToMany(mappedBy="ingredient", fetch=FetchType.LAZY, cascade= CascadeType.REMOVE)
 	protected List<IngredientRecipe> ingredientsInRecipe;
 

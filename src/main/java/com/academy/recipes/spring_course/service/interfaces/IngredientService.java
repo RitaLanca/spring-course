@@ -7,7 +7,7 @@ import com.academy.recipes.spring_course.model.IngredientRecipe;
 public interface IngredientService {
 		Ingredient createNewIngredient(Ingredient ingredient);
 	
-	Boolean addIngredientToRecipe(Long recipeId, Ingredient ingredient);
+	Boolean addIngredientToRecipe(Long recipeId, IngredientRecipeDto ingredient);
 
 	Boolean removeIngredientFromRecipe(Long recipeId, Ingredient ingredient);
 

@@ -5,10 +5,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.SystemPropertyUtils;
 
+import com.academy.recipes.spring_course.business.dtos.IngredientRecipeDto;
 import com.academy.recipes.spring_course.business.dtos.RecipeDto;
 import com.academy.recipes.spring_course.model.Author;
+import com.academy.recipes.spring_course.model.Ingredient;
+import com.academy.recipes.spring_course.model.IngredientRecipe;
 import com.academy.recipes.spring_course.model.Recipe;
+import com.academy.recipes.spring_course.repository.IngredientRepository;
 import com.academy.recipes.spring_course.repository.RecipeRepository;
 import com.academy.recipes.spring_course.service.interfaces.AuthorService;
 import com.academy.recipes.spring_course.service.interfaces.RecipeService;
@@ -20,9 +25,15 @@ public class RecipeServiceImpl implements RecipeService{
 	@Autowired
 	private RecipeRepository recipeRepository;
 
+	@Autowired
+	private IngredientRepository ingredientRepository;
+
 
 	@Autowired
 	private AuthorService authorService;
+	
+	@Autowired
+	private RecipeService recipeService;
 	
 	@Override
 	public String createRecipe(Recipe recipe, Long authorId) {
@@ -113,4 +124,20 @@ public class RecipeServiceImpl implements RecipeService{
 		
 		return recipeDtoList;
 	}
+
+	@Override
+	public RecipeDto getRecipeDetails(Long recipeId) {
+		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
+	
+		List<IngredientRecipe> list= recipeSelected.getIngredientsInRecipe();
+		
+		return new RecipeDto(recipeSelected.getName(), recipeSelected.getDescription(), recipeSelected.getServings(), recipeSelected.getAuthor(), list);	
+		
+		
+		
+	
+			
+		}
+		
+		
 }

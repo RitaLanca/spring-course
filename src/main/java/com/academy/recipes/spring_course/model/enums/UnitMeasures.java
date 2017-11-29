@@ -3,6 +3,10 @@ package com.academy.recipes.spring_course.model.enums;
 public enum UnitMeasures {
 	GR,
 	POUNDS,
-	KILOGRAMS,
-	LITER
+	KG,
+	LT,
+	ML,
+	TSP,
+	TBSP,
+	UNIT
 }

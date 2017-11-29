@@ -34,23 +34,34 @@ public class IngredientServiceImpl implements IngredientService {
 				 
 	}
 	
-	public Boolean addIngredientToRecipe(Long recipeId, Ingredient ingredient) {
+	public Boolean addIngredientToRecipe(Long recipeId, IngredientRecipeDto ingredientDto) {
 	
 		Recipe recipeSelected=recipeService.findRecipeById(recipeId);
-		Ingredient ingredientToAdd= ingredientRepository.findIngredientByName(ingredient.getName());	
+		Ingredient ingredientToAdd= ingredientRepository.findIngredientByName(ingredientDto.getIngredientName());	
 		
 		if(recipeSelected==null) {
 			return false;
 		}
-		
+		if(ingredientDto.getIngredientName()==null || ingredientDto.getQuantity()==null || ingredientDto.getUnitMeasure()==null) {
+			return false;
+		}
 		
 		//Checking if ingredient already exists
 		if(ingredientToAdd==null) {
+			Ingredient ingredient = new Ingredient();
+			ingredient.setName(ingredientDto.getIngredientName());
 			ingredientToAdd= createNewIngredient(ingredient);
 			
 		}
+		IngredientRecipe ingredientRecipe= ingredientRecipeRepository.findIngredientRecipeByRecipeIdAndIngredientId(recipeId, ingredientToAdd.getId());
+		if(ingredientRecipe == null) {
+			ingredientRecipe= new IngredientRecipe(ingredientToAdd, recipeSelected, ingredientDto.getQuantity(), ingredientDto.getUnitMeasure());
+		}else {
+			ingredientRecipe.setQuantity(ingredientDto.getQuantity());
+			ingredientRecipe.setUnitMeasure(ingredientDto.getUnitMeasure());
+		}
 		
-		IngredientRecipe ingredientRecipe= new IngredientRecipe(ingredientToAdd, recipeSelected);
+		
 		ingredientRecipeRepository.saveAndFlush(ingredientRecipe);
 
 		return true;

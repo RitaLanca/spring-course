@@ -2,6 +2,7 @@ package com.academy.recipes.spring_course.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.academy.recipes.spring_course.business.dtos.RecipeDto;
 import com.academy.recipes.spring_course.model.Recipe;
 import com.academy.recipes.spring_course.service.interfaces.RecipeService;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -29,14 +31,25 @@ public class RecipeController {
 	@Autowired
 	private RecipeService recipeService;
 	
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "")
 	public List<RecipeDto> findAllRecipes() {
 		return recipeService.findAllRecipes();
 	}
 
+	@RequestMapping(value="/recipeDetails")
+	public RecipeDto getRecipeSelectedDetail(@RequestParam ("id") Long id) {
+		return recipeService.getRecipeDetails(id);
+		
+	}
 	
 	@PostMapping("/add")
 	public String createRecipe(@RequestBody Recipe recipe, @RequestParam ("authorId") Long authorId) {
+	
+		//Could be used mapper wich implementation is commented
+		//public String createRecipe(@RequestBody Map payload, @RequestParam ("authorId") Long authorId) {
+		//ObjectMapper mapper = new ObjectMapper();
+
+		//Recipe recipe = mapper.convertValue(payload, Recipe.class);
 		return recipeService.createRecipe(recipe, authorId);
 	}
 

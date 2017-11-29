@@ -33,4 +33,16 @@ public class RecipeDto {
 	protected List<CategoryRecipe> recipesInCategory;
 	
 	protected List<IngredientRecipe> ingredientsInRecipe;
+
+	
+	public RecipeDto(String name, String description, int servings, Author author,
+			List<IngredientRecipe> ingredientsInRecipe) {
+		this.name = name;
+		this.description = description;
+		this.servings = servings;
+		this.author = author;
+		this.ingredientsInRecipe = ingredientsInRecipe;
+	}
+	
+	
 }

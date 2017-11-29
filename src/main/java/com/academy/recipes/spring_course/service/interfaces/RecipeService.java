@@ -22,4 +22,6 @@ public interface RecipeService {
 	
 	Recipe updateRecipe (Long recipeId, Recipe recipe);
 	
+	RecipeDto getRecipeDetails (Long recipeId);
+	
 }

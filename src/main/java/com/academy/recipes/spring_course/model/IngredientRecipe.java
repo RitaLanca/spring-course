@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.academy.recipes.spring_course.model.enums.UnitMeasures;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -20,41 +21,41 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IngredientRecipe {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
 	@ManyToOne
-	@JoinColumn(name="ingredient_id") //nome da coluna que corresponde ao linked table
-	@JsonManagedReference
+	@JoinColumn(name = "ingredient_id") // nome da coluna que corresponde ao linked table
+	// @JsonManagedReference(value="ingredient")
 	protected Ingredient ingredient;
 
 	@ManyToOne
-	@JoinColumn(name="recipe_id")
-	@JsonManagedReference
+	@JoinColumn(name = "recipe_id")
+	// @JsonManagedReference(value="ingredientRecipe")
 	protected Recipe recipe;
-	
-	protected int quantity;
-	
+
+	protected float quantity;
+
 	@Enumerated(EnumType.STRING)
 	protected UnitMeasures unitMeasure;
-	
+
 	public IngredientRecipe(Ingredient ingredient, Recipe recipe) {
 		this.ingredient = ingredient;
 		this.recipe = recipe;
 	}
-		
-	public IngredientRecipe(Ingredient ingredient, Recipe recipe, int quantity, UnitMeasures unitMeasure) {
+
+	public IngredientRecipe(Ingredient ingredient, Recipe recipe, float quantity, UnitMeasures unitMeasure) {
 		this.ingredient = ingredient;
 		this.recipe = recipe;
 		this.quantity = quantity;
 		this.unitMeasure = unitMeasure;
 	}
 
-	public IngredientRecipe(int quantity, UnitMeasures unitMeasure) {
-		super();
+	public IngredientRecipe(float quantity, UnitMeasures unitMeasure) {
 		this.quantity = quantity;
 		this.unitMeasure = unitMeasure;
 	}
@@ -64,8 +65,5 @@ public class IngredientRecipe {
 		return "IngredientRecipe [ingredient=" + ingredient + ", recipe=" + recipe + ", quantity=" + quantity
 				+ ", unitMeasure=" + unitMeasure + "]";
 	}
-	
-	
 
-	
 }

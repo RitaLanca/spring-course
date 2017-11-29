@@ -27,9 +27,14 @@ public class IngredientControlller {
 		return ingredientService.createNewIngredient(ingredient);
 	}
 	
+	
+//	public Boolean addIngredientToRecipe (@RequestParam("id") Long recipeId,@RequestBody Ingredient ingredient) {
+//		return ingredientService.addIngredientToRecipe(recipeId, ingredient);
+//	}
 	@PostMapping("/add")
-	public Boolean addIngredientToRecipe (@RequestParam("id") Long recipeId,@RequestBody Ingredient ingredient) {
+	public Boolean addIngredientToRecipe(@RequestParam("recipeId") Long recipeId, @RequestBody IngredientRecipeDto ingredient) {
 		return ingredientService.addIngredientToRecipe(recipeId, ingredient);
+		 
 	}
 	
 	@DeleteMapping("/remove")
@@ -43,9 +48,9 @@ public class IngredientControlller {
 	}
 	
 	
-	@PostMapping("/set")
-	public IngredientRecipeDto setIngredient (@RequestParam("recipeId") Long recipeId,@RequestParam("ingredientId") Long ingredientId, @RequestBody IngredientRecipe settings) {
-		return ingredientService.setIngredient(recipeId, ingredientId, settings );
-	}
+//	@PostMapping("/set")
+//	public IngredientRecipeDto setIngredient (@RequestParam("recipeId") Long recipeId,@RequestParam("ingredientId") Long ingredientId, @RequestBody IngredientRecipe settings) {
+//		return ingredientService.setIngredient(recipeId, ingredientId, settings );
+//	}
 	
 }
